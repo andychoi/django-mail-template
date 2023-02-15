@@ -4,7 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext
-from ckeditor.fields import RichTextField
+# from ckeditor.fields import RichTextField
+from tinymce import models as tinymce_models
 from django_mail_template.tools import (replace_context_variable,
                                         clean_address_list)
 
@@ -38,7 +39,7 @@ class MailTemplate(models.Model):
         help_text=_('Subject text for the mail. Context variable can be used.')
     )
 
-    body = RichTextField(
+    body = tinymce_models.HTMLField(
         verbose_name=_('Body'), blank=True, null=True,
         help_text=_('The content of the mail. Context variable can be '
                     'used.'))
